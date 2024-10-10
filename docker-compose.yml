@@ -1,0 +1,10 @@
+version: '3.8'  # Specify the Docker Compose version
+
+services:
+  sql:
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+      ACCEPT_EULA: "Y"  # Correct syntax for accepting the EULA
+      MSSQL_SA_PASSWORD: "Password@1"  # Correct syntax for setting the SA password
+    ports:
+      - "1433:1433"  # Correct syntax for port mapping
