@@ -10,10 +10,10 @@ services:
       - "1433:1433"  # Correct syntax for port mapping
 
   app:
-    image: suyen05/docker-skinet
+    image: appregistryskinet.azurecr.io/skinet-api
     environment:
       - ConnectionStrings__DefaultConnection=Server=sql;Database=skinet;User=sa;Password=Password@1;Encrypt=False;  # Updated connection string
     ports:
-      - "5000:8080"  # Expose .NET Core app on port 5000
+      - "5000:5000"  # Expose .NET Core app on port 5000
     depends_on:
       - sql  # Ensure SQL starts before the app
