@@ -8,12 +8,23 @@ services:
       MSSQL_SA_PASSWORD: "Password@1"  # Correct syntax for setting the SA password
     ports:
       - "1433:1433"  # Correct syntax for port mapping
-
-  app:
-    image: suyen05/docker-skinet
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=sql;Database=skinet;User=sa;Password=Password@1;Encrypt=False;  # Updated connection string
+    volumes:
+      - sql-data:/var/opt/mssql
+  # app:
+  #   image: suyen05/docker-skinet
+  #   environment:
+  #     - ConnectionStrings__DefaultConnection=Server=sql;Database=skinet;User=sa;Password=Password@1;Encrypt=False;  # Updated connection string
+  #   ports:
+  #     - "5000:8080"  # Expose .NET Core app on port 5000
+  #   depends_on:
+  #     - sql  # Ensure SQL starts before the app
+  redis:
+    image: redis:latest
     ports:
-      - "5000:8080"  # Expose .NET Core app on port 5000
-    depends_on:
-      - sql  # Ensure SQL starts before the app
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
+  sql-data:

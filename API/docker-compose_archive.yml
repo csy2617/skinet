@@ -17,3 +17,12 @@ services:
       - "5000:5000"  # Expose .NET Core app on port 5000
     depends_on:
       - sql  # Ensure SQL starts before the app
+
+  app2:
+    image: suyen05/docker-skinet
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sql;Database=skinet;User=sa;Password=Password@1;Encrypt=False;  # Updated connection string
+    ports:
+      - "5000:8080"  # Expose .NET Core app on port 5000
+    depends_on:
+      - sql  # Ensure SQL starts before the app
