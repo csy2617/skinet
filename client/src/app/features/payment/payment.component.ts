@@ -17,12 +17,14 @@ export class PaymentComponent implements OnInit {
   stripeService = inject(StripeService);
 
   async ngOnInit() {
-    this.stripe = this.stripeService.getStripeInstance();
+    this.stripe = await this.stripeService.getStripeInstance();
 
     if (this.stripe) {
       this.elements = this.stripe.elements();
       this.cardElement = this.elements.create('card');
       this.cardElement.mount('#card-element');
+    }else {
+      console.error('Stripe instance could not be initialized');
     }
   }
 
